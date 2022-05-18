@@ -1,7 +1,10 @@
 import React from 'react';
 import { DateTime } from 'luxon';
 import * as ReactDOM from 'react-dom';
+import $ from 'jquery';
 import './index.css';
+
+const isDaterOn = false;
 
 const endStamp = DateTime.fromISO('2022-04-03', { zone: 'Europe/Budapest' }).toMillis();
 
@@ -27,5 +30,29 @@ function updateClock() {
   ReactDOM.render(element, document.getElementById('root'));
 }
 
-updateClock();
-setInterval(updateClock, 1000);
+function printDachshund(data) {
+  const rnd = Math.floor(Math.random() * data.items.length);
+  const imageSrc = data.items[rnd].media.m.replace('_m', '_b');
+  const element = <div className="h-100 row align-items-center"><div className="col align-top-side"><img src={imageSrc} alt="dachshund" /></div></div>;
+
+  ReactDOM.render(element, document.getElementById('root'));
+}
+
+function showDachshund() {
+  $.getJSON(
+    'http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?',
+    {
+      tags: 'dachshund',
+      tagmode: 'any',
+      format: 'json',
+    },
+    printDachshund,
+  );
+}
+
+if (isDaterOn) {
+  updateClock();
+  setInterval(updateClock, 1000);
+} else {
+  showDachshund();
+}
