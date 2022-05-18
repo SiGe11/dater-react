@@ -40,7 +40,7 @@ function printDachshund(data) {
 
 function showDachshund() {
   $.getJSON(
-    'http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?',
+    'https://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?',
     {
       tags: 'dachshund',
       tagmode: 'any',
