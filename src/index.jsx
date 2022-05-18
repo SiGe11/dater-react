@@ -1,6 +1,6 @@
 import React from 'react';
 import { DateTime } from 'luxon';
-import * as ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import $ from 'jquery';
 import './index.css';
 
@@ -27,15 +27,19 @@ function updateClock() {
   const countdown = `${d} nap, ${h} óra, ${m} perc, ${s} másodperc`;
   const element = <div className="h-100 row align-items-center"><div className="col align-top-side">{countdown}</div></div>;
 
-  ReactDOM.render(element, document.getElementById('root'));
+  const container = document.getElementById('root');
+  const root = createRoot(container);
+  root.render(element);
 }
 
 function printDachshund(data) {
   const rnd = Math.floor(Math.random() * data.items.length);
   const imageSrc = data.items[rnd].media.m.replace('_m', '_b');
-  const element = <div className="h-100 row align-items-center"><div className="col align-top-side"><img src={imageSrc} alt="dachshund" /></div></div>;
+  const element = <div className="h-100 row align-items-center"><div className="col align-top-side"><img src={imageSrc} fetchpriority="high" alt="dachshund" /></div></div>;
 
-  ReactDOM.render(element, document.getElementById('root'));
+  const container = document.getElementById('root');
+  const root = createRoot(container);
+  root.render(element);
 }
 
 function showDachshund() {

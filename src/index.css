@@ -29,6 +29,10 @@ body {
 	-webkit-tap-highlight-color: transparent
 }
 
+img {
+	width: 67%; /* or max-width: 100%; */
+	height: auto;
+  }
 
 .row {
 	--bs-gutter-x: 1.5rem;
