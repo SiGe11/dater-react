@@ -35,7 +35,7 @@ function updateClock() {
 function printDachshund(data) {
   const rnd = Math.floor(Math.random() * data.items.length);
   const imageSrc = data.items[rnd].media.m.replace('_m', '_b');
-  const element = <div className="h-100 row align-items-center"><div className="col align-top-side"><img src={imageSrc} sizes="(max-width: 100px)" fetchpriority="high" alt="dachshund" /></div></div>;
+  const element = <div className="h-100 row align-items-center"><div className="col align-top-side"><img src={imageSrc} fetchpriority="high" alt="dachshund" /></div></div>;
 
   const container = document.getElementById('root');
   const root = createRoot(container);
