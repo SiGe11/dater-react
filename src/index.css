@@ -15,23 +15,28 @@ html {
 	min-height: 100%;
 }
 
+* {
+	margin: 0;
+	padding: 0;
+}
 
 body {
 	height: 32%;
+	display: grid;
 	background-color: #0e387a;
 	font-size: 36px;
 	color: #9fafca;
 	font-weight: 700;
 	font-family: Georgia, "Times New Roman", Times, serif;
-	margin: 0;
 	line-height: var(--bs-body-line-height);
 	-webkit-text-size-adjust: 100%;
 	-webkit-tap-highlight-color: transparent
 }
 
 img {
-	width: 67%; /* or max-width: 100%; */
-	height: auto;
+	max-width: 100%;
+    max-height: 100vh;
+    margin: auto;
   }
 
 .row {
