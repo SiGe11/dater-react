@@ -42,12 +42,17 @@ function printDachshund(data) {
   root.render(element);
 }
 
+function getTagmodeWithWeigh() {
+  const tagmodes = ['all', 'all', 'any'];
+  return tagmodes[Math.floor(Math.random() * tagmodes.length)];
+}
+
 function showDachshund() {
   $.getJSON(
     'https://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?',
     {
       tags: 'dachshund, wiener dog, sausage dog',
-      tagmode: 'all',
+      tagmode: getTagmodeWithWeigh(),
       format: 'json',
     },
     printDachshund,
