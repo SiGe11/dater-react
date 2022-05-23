@@ -4,7 +4,7 @@ import { createRoot } from 'react-dom/client';
 import $ from 'jquery';
 import './index.css';
 
-const isDaterOn = false;
+const isDaterOn = true;
 
 const endStamp = DateTime.fromISO('2022-04-03', { zone: 'Europe/Budapest' }).toMillis();
 
@@ -51,6 +51,11 @@ function getTagmodeWithWeigh() {
   return tagmodes[Math.floor(Math.random() * tagmodes.length)];
 }
 
+function checkForDoggoInDomain() {
+  const currentHostname = window.location.hostname;
+  return currentHostname.includes('gizsgugya');
+}
+
 function showDachshund() {
   $.getJSON(
     'https://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?',
@@ -63,7 +68,7 @@ function showDachshund() {
   );
 }
 
-if (isDaterOn) {
+if (isDaterOn && !checkForDoggoInDomain()) {
   updateClock();
   setInterval(updateClock, 1000);
 } else {
