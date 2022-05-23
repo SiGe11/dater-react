@@ -4,7 +4,7 @@ import { createRoot } from 'react-dom/client';
 import $ from 'jquery';
 import './index.css';
 
-const isDaterOn = true;
+const isDaterOn = false;
 
 const endStamp = DateTime.fromISO('2022-04-03', { zone: 'Europe/Budapest' }).toMillis();
 
@@ -33,6 +33,7 @@ function updateClock() {
 }
 
 function printDachshund(data) {
+  console.log(data);
   const rnd = Math.floor(Math.random() * data.items.length);
   const imageSrc = data.items[rnd].media.m.replace('_m', '_b');
   const imageUrl = (new URL(imageSrc));
@@ -51,17 +52,25 @@ function getTagmodeWithWeigh() {
   return tagmodes[Math.floor(Math.random() * tagmodes.length)];
 }
 
+function getTags(tagmode) {
+  if (tagmode === 'any') {
+    return 'wiener dog, sausage dog';
+  }
+  return 'dachshund, wiener dog, sausage dog';
+}
+
 function checkForDoggoInDomain() {
   const currentHostname = window.location.hostname;
   return currentHostname.includes('gizsgugya');
 }
 
 function showDachshund() {
+  const tagmode = getTagmodeWithWeigh();
   $.getJSON(
     'https://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?',
     {
-      tags: 'dachshund, wiener dog, sausage dog',
-      tagmode: getTagmodeWithWeigh(),
+      tags: getTags(tagmode),
+      tagmode,
       format: 'json',
     },
     printDachshund,
