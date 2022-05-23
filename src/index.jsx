@@ -33,7 +33,6 @@ function updateClock() {
 }
 
 function printDachshund(data) {
-  console.log(data);
   const rnd = Math.floor(Math.random() * data.items.length);
   const imageSrc = data.items[rnd].media.m.replace('_m', '_b');
   const imageUrl = (new URL(imageSrc));
