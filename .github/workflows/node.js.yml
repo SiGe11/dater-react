@@ -11,6 +11,7 @@ on:
 
 jobs:
   build:
+    name: build-prod
 
     runs-on: ubuntu-latest
 
@@ -28,4 +29,17 @@ jobs:
         cache: 'npm'
     - run: npm ci
     - run: npm run build --if-present
-
+      env:
+        CI: false
+    - run: ls
+    - name: Copy to docker repo
+      uses: cpina/github-action-push-to-another-repository@main
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
+      with:
+        source-directory: 'build'
+        destination-github-username: 'SiGe11'
+        destination-repository-name: 'sige-nginx'
+        user-email: sim.gergely@gmail.com
+        target-branch: master
+        target-directory: 'static-html'
