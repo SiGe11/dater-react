@@ -1,0 +1,17 @@
+body {
+    padding-top: 3rem;
+    /* padding-left: 33%; */
+    background-color: #0b0c10 !important;
+}
+
+textarea {
+  width: 600px;
+  height: 300px;
+  background-color: #1f2833;
+  color: #66fcf1;
+  border-color: #c7c5c6;
+}
+
+div {
+  text-align: center;
+}
