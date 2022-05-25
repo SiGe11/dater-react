@@ -4,27 +4,27 @@ import { createRoot } from 'react-dom/client'
 import $ from 'jquery'
 import './index.css'
 
-const isDaterOn = false
+const isDaterOn: boolean = false
 
-const endStamp = DateTime.fromISO('2022-04-03', { zone: 'Europe/Budapest' }).toMillis()
+const endStamp: number = DateTime.fromISO('2022-04-03', { zone: 'Europe/Budapest' }).toMillis()
 
-let newDate = new Date()
-let newStamp = newDate.getTime()
+let newDate: Date = new Date()
+let newStamp: number = newDate.getTime()
 
 function updateClock () : void {
   newDate = new Date()
   newStamp = newDate.getTime()
-  let diff = Math.round((endStamp - newStamp) / 1000)
+  let diff: number = Math.round((endStamp - newStamp) / 1000)
 
-  const d = Math.floor(diff / (24 * 60 * 60))
+  const d: number = Math.floor(diff / (24 * 60 * 60))
   diff -= d * 24 * 60 * 60
-  const h = Math.floor(diff / (60 * 60))
+  const h: number = Math.floor(diff / (60 * 60))
   diff -= h * 60 * 60
-  const m = Math.floor(diff / (60))
+  const m: number = Math.floor(diff / (60))
   diff -= m * 60
-  const s = diff
+  const s: number = diff
 
-  const countdown = `${d} nap, ${h} óra, ${m} perc, ${s} másodperc`
+  const countdown: string = `${d} nap, ${h} óra, ${m} perc, ${s} másodperc`
   const element = <div className="h-100 row align-items-center"><div className="col align-top-side">{countdown}</div></div>
 
   const container = document.getElementById('root')
@@ -33,9 +33,9 @@ function updateClock () : void {
 }
 
 function printDachshund (data: { items: string | any[] }) : void {
-  const rnd = Math.floor(Math.random() * data.items.length)
+  const rnd: number = Math.floor(Math.random() * data.items.length)
   const imageSrc = data.items[rnd].media.m.replace('_m', '_b')
-  const imageUrl = (new URL(imageSrc))
+  const imageUrl: URL = (new URL(imageSrc))
   if (!['https:'].includes(imageUrl.protocol)) {
     throw new Error('Api response is not https')
   }
@@ -49,7 +49,7 @@ function printDachshund (data: { items: string | any[] }) : void {
 }
 
 function getTagmodeWithWeigh (): string {
-  const tagmodes = ['all', 'all', 'any']
+  const tagmodes: string[] = ['all', 'all', 'any']
   return tagmodes[Math.floor(Math.random() * tagmodes.length)]
 }
 
@@ -61,7 +61,7 @@ function getTags (tagmode: string): string {
 }
 
 function checkForDoggoInDomain () : boolean {
-  const currentHostname = window.location.hostname
+  const currentHostname: string = window.location.hostname
   return currentHostname.includes('gizsgugya')
 }
 
