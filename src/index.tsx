@@ -48,34 +48,13 @@ function printDachshund (data: { items: string | any[] }) : void {
   root.render(element)
 }
 
-function getTagmodeWithWeigh (): string {
-  const tagmodes: string[] = ['all', 'all', 'any']
-  return tagmodes[Math.floor(Math.random() * tagmodes.length)]
-}
-
-function getTags (tagmode: string): string {
-  if (tagmode === 'any') {
-    return 'wiener dog, sausage dog'
-  }
-  return 'dachshund, wiener dog, sausage dog'
-}
-
 function checkForDoggoInDomain () : boolean {
   const currentHostname: string = window.location.hostname
   return currentHostname.includes('gizsgugya')
 }
 
-function showDachshund () : void {
-  const tagmode = getTagmodeWithWeigh()
-  $.getJSON(
-    'https://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?',
-    {
-      tags: getTags(tagmode),
-      tagmode,
-      format: 'json'
-    },
-    printDachshund
-  )
+function showDachshund () {
+  $.getJSON('https://dogs.simongergely.eu/dogs', {}, printDachshund)
 }
 
 if (isDaterOn && !checkForDoggoInDomain()) {
