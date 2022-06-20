@@ -4,6 +4,9 @@ import { createRoot } from 'react-dom/client'
 import $ from 'jquery'
 import './index.css'
 
+const container = document.getElementById('root')
+const root = createRoot(container!)
+
 const isDaterOn: boolean = false
 
 const endStamp: number = DateTime.fromISO('2022-04-03', { zone: 'Europe/Budapest' }).toMillis()
@@ -11,7 +14,7 @@ const endStamp: number = DateTime.fromISO('2022-04-03', { zone: 'Europe/Budapest
 let newDate: Date = new Date()
 let newStamp: number = newDate.getTime()
 
-function updateClock () : void {
+function updateClock (): void {
   newDate = new Date()
   newStamp = newDate.getTime()
   let diff: number = Math.round((endStamp - newStamp) / 1000)
@@ -25,14 +28,14 @@ function updateClock () : void {
   const s: number = diff
 
   const countdown: string = `${d} nap, ${h} óra, ${m} perc, ${s} másodperc`
-  const element = <div className="h-100 row align-items-center"><div className="col align-top-side">{countdown}</div></div>
+  const element = <div className="h-100 row align-items-center">
+    <div className="col align-top-side">{countdown}</div>
+  </div>
 
-  const container = document.getElementById('root')
-  const root = createRoot(container!)
   root.render(element)
 }
 
-function printDachshund (data: { items: string | any[] }) : void {
+function printDachshund (data: { items: string | any[] }): void {
   const rnd: number = Math.floor(Math.random() * data.items.length)
   const imageSrc = data.items[rnd].media.m.replace('_m', '_b')
   const imageUrl: URL = (new URL(imageSrc))
@@ -41,25 +44,31 @@ function printDachshund (data: { items: string | any[] }) : void {
   }
 
   // @ts-ignore
-  const element = <div className="h-100 row align-items-center"><div className="col align-top-side"><img src={imageUrl.toString()} fetchpriority="high" alt="dachshund"/></div></div>
+  const element = <div className="h-100 row align-items-center"><div className="col align-top-side"><img src={imageUrl.toString()} fetchpriority="high" alt="dachshund"/></div>
+  </div>
 
-  const container = document.getElementById('root')
-  const root = createRoot(container!)
   root.render(element)
 }
 
-function checkForDoggoInDomain () : boolean {
+function checkForDoggoInDomain (): boolean {
   const currentHostname: string = window.location.hostname
   return currentHostname.includes('gizsgugya')
 }
 
 function showDachshund () {
-  $.getJSON('https://dogs.simongergely.eu/dogs', {}, printDachshund)
+  $.getJSON('http://localhost:8080/dogs', {}, printDachshund)
+}
+
+function showLoadbar () {
+  // @ts-ignore
+  const element = <div className="h-100 row align-items-center"><div className="col align-top-side"><img src="assets/loadingwheel.gif" fetchpriority="high" alt="loading"/></div></div>
+  root.render(element)
 }
 
 if (isDaterOn && !checkForDoggoInDomain()) {
   updateClock()
   setInterval(updateClock, 1000)
 } else {
+  showLoadbar()
   showDachshund()
 }
