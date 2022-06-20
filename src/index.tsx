@@ -56,7 +56,7 @@ function checkForDoggoInDomain (): boolean {
 }
 
 function showDachshund () {
-  $.getJSON('http://localhost:8080/dogs', {}, printDachshund)
+  $.getJSON('https://dogs.simongergely.eu/dogs', {}, printDachshund)
 }
 
 function showLoadbar () {
