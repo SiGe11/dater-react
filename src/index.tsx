@@ -61,7 +61,7 @@ function showDachshund () {
 
 function showLoadbar () {
   // @ts-ignore
-  const element = <div className="h-100 row align-items-center"><div className="col align-top-side"><img src="assets/loadingwheel.gif" fetchpriority="high" alt="loading"/></div></div>
+  const element = <div className="h-100 row align-items-center"><div className="col align-top-side"><img src="assets/loadinghound.gif" fetchpriority="high" alt="loading"/></div></div>
   root.render(element)
 }
 
