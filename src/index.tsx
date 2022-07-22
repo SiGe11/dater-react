@@ -58,6 +58,7 @@ function checkForDoggoInDomain (): boolean {
 
 function showDachshund (): void {
   function generateAuthToken () : string {
+    // Yes, this is just for test.
     const userPass = Buffer.from('test:elek').toString('base64')
     return `Basic ${userPass}`
   }
