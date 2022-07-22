@@ -2,6 +2,7 @@ import React from 'react'
 import { DateTime } from 'luxon'
 import { createRoot } from 'react-dom/client'
 import $ from 'jquery'
+import { Buffer } from 'buffer'
 import './index.css'
 
 const container = document.getElementById('root')
@@ -55,11 +56,21 @@ function checkForDoggoInDomain (): boolean {
   return currentHostname.includes('gizsgugya')
 }
 
-function showDachshund () {
+function showDachshund (): void {
+  function generateAuthToken () : string {
+    const userPass = Buffer.from('test:elek').toString('base64')
+    return `Basic ${userPass}`
+  }
+
+  $.ajaxSetup({
+    headers: {
+      Authorization: generateAuthToken()
+    }
+  })
   $.getJSON('https://dogs.simongergely.eu/dogs', {}, printDachshund)
 }
 
-function showLoadbar () {
+function showLoadbar (): void {
   // @ts-ignore
   const element = <div className="h-100 row align-items-center"><div className="col align-top-side"><img src="assets/loadinghound.gif" fetchpriority="high" alt="loading"/></div></div>
   root.render(element)
